@@ -1,0 +1,29 @@
+@(nameForm: Form[String])(implicit messages: Messages, flash: Flash)
+@import views.html.elements.flashMessages
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Clustered chat</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" media="screen" href='@routes.Assets.versioned("stylesheets/index.css")' />
+  </head>
+
+  <body>
+
+    <div class="container">
+      <form class="signin-form" action="@routes.Application.signin" method="POST">
+        <div class="photo"></div>
+        @elements.formErrors(nameForm)
+
+        <input type="text" placeholder="name" required autofocus name=@nameForm("name").name>
+        <button type="submit">Enter</button>
+      </form>
+
+      <hr />
+      @flashMessages(flash)
+
+    </div>
+
+  </body>
+</html>

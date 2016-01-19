@@ -1,0 +1,7 @@
+@(form: Form[_])
+
+@if(form.hasGlobalErrors){
+<div class="">
+    @form.globalErrors.map { e => @e.message }
+</div>
+}

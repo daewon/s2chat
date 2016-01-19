@@ -1,0 +1,31 @@
+@import services.Model._
+@import play.api.libs.json.{Json, JsValue}
+
+@(user: String, rooms: Rooms)(content: Html)(implicit request: play.api.mvc.RequestHeader, flash: Flash)
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <title>@user</title>
+    <link rel="shortcut icon" type="image/png" href='@routes.Assets.versioned("images/favicon.png")'>
+    <link rel="stylesheet" media="screen" href='@routes.Assets.versioned("stylesheets/chat.css")' />
+    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js" ></script>
+    <script type='text/javascript' src='@routes.Assets.versioned("javascripts/reconnecting-websocket.js")' ></script>
+    <script type='text/javascript' src='@routes.Assets.versioned("javascripts/chat.js")'></script>
+    <script>
+      var common = {};
+
+      common.wsUrl = "@routes.Application.connect().webSocketURL()";
+      common.user = "@user";
+      common.rooms = @rooms.mkString("[", ", ", "]");
+      common.room = common.rooms[0] // mock
+
+      console.log(common);
+    </script>
+  </head>
+
+  <body>
+    @content
+  </body>
+</html>
